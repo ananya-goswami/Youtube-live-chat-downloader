@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Silver_1.0",
+  "version": "1.0.0",
+  "description": "Capture YouTube live + replay chat and export per-video CSV (Real Time IST, Author, Message).",
+  "permissions": ["storage", "downloads", "contextMenus"],
+  "host_permissions": ["https://www.youtube.com/*"],
+    "background": {
+    "service_worker": "service_worker.js"
+  },
+  "action": {
+    "default_title": "Silver_1.0: Download CSV"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/watch*",
+        "https://www.youtube.com/live_chat*",
+        "https://www.youtube.com/live_chat_replay*"
+      ],
+      "js": ["contentScript.js"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["pageScript.js"],
+      "matches": ["https://www.youtube.com/*"]
+    }
+  ]
+}
